@@ -66,7 +66,7 @@ export const SignOutCard = ({setState}: SignOurCardProps) => {
                     className="w-full relative"
                     >
                         <FcGoogle className="size-5 absolute top-2.5 left-2.5" />
-                        Sign in with Google
+                        Sign up with Google
                     </Button>
                     <Button
                     disabled={false}
@@ -76,7 +76,7 @@ export const SignOutCard = ({setState}: SignOurCardProps) => {
                     className="w-full relative"
                     >
                         <FaGithub className="size-5 absolute top-2.5 left-2.5" />
-                        Sign in with Github
+                        Sign up with Github
                     </Button>
                 </div>
                 <p className="text-xs text-muted-foreground">
