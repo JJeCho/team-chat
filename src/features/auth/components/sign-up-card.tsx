@@ -9,12 +9,12 @@ import { TriangleAlert } from "lucide-react";
 import { useState } from "react";
 import { useAuthActions } from "@convex-dev/auth/react";
 
-interface SignOurCardProps {
+interface SignUpCardProps {
     setState: (state: SignInFlow) => void
 }
-export const SignOutCard = ({setState}: SignOurCardProps) => {
+export const SignUpCard = ({setState}: SignUpCardProps) => {
     const { signIn } = useAuthActions();
-    
+    const [name, setName] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [confirmPassword, setConfirmPassword] = useState("")
@@ -38,8 +38,9 @@ export const SignOutCard = ({setState}: SignOurCardProps) => {
         }
 
         setPending(true);
-        signIn("password", {email, password, flow: "signUp"})
-        .catch(() => {
+        signIn("password", {name, email, password, flow: "signUp"})
+        .catch((e) => {
+            console.log(e)
             setError("Something went wrong")
         }).finally(() => {
             setPending(false)
@@ -70,6 +71,13 @@ export const SignOutCard = ({setState}: SignOurCardProps) => {
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="Email"
                     type="email"
+                    required
+                    />
+                    <Input 
+                    disabled={pending}
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    placeholder="Full Name"
                     required
                     />
                     <Input 
