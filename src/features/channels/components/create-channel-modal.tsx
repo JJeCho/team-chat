@@ -1,17 +1,19 @@
 import { Button } from "@/components/ui/button";
 import {
-    Dialog,
-    DialogContent,
-    DialogHeader,
-    DialogTitle,
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { useWorkspaceId } from "@/hooks/use-workspace-id";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useCreateChannel } from "../api/use-create-channel";
 import { useCreateChannelModal } from "../store/use-create-channel-modal";
 
 export const CreateChannelModal = () => {
+  const router = useRouter();
   const [open, setOpen] = useCreateChannelModal();
 
   const workspaceId = useWorkspaceId();
@@ -33,6 +35,7 @@ export const CreateChannelModal = () => {
     mutate({name, workspaceId},
         {
             onSuccess: (id) => {
+              router.push(`/workspace/${workspaceId}/channel/${id}`);
                 handleClose();
             }
         }
