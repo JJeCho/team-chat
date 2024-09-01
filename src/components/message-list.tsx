@@ -1,12 +1,13 @@
-import { GetMessagesReturnType } from "@/features/messages/api/use-get-messages";
-import { differenceInMinutes, format, isToday, isYesterday } from "date-fns";
-import { Message } from "./message";
-import { ChannelHero } from "./channel-hero";
-import { Id } from "../../convex/_generated/dataModel";
-import { useState } from "react";
-import { useWorkspaceId } from "@/hooks/use-workspace-id";
 import { useCurrentMember } from "@/features/members/api/use-current-members";
+import { GetMessagesReturnType } from "@/features/messages/api/use-get-messages";
+import { useWorkspaceId } from "@/hooks/use-workspace-id";
+import { differenceInMinutes, format, isToday, isYesterday } from "date-fns";
 import { Loader } from "lucide-react";
+import { useState } from "react";
+import { Id } from "../../convex/_generated/dataModel";
+import { ChannelHero } from "./channel-hero";
+import { ConversationHero } from "./conversation-hero";
+import { Message } from "./message";
 
 interface MessageListProps {
   memberName?: string;
@@ -134,6 +135,10 @@ export const MessageList = ({
       )}
       {variant === "channel" && channelName && channelCreationTime && (
         <ChannelHero name={channelName} creationTime={channelCreationTime} />
+      )}
+
+      {variant === "conversation" && (
+        <ConversationHero name={memberName} image={memberImage} />
       )}
     </div>
   );
