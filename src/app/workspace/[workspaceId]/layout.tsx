@@ -9,6 +9,7 @@ import {
   ResizablePanel,
   ResizablePanelGroup,
 } from "@/components/ui/resizable";
+import { Profile } from "@/features/members/components/profile";
 import { Thread } from "@/features/messages/components/thread";
 import { Loader } from "lucide-react";
 import { Id } from "../../../../convex/_generated/dataModel";
@@ -17,8 +18,8 @@ interface WorkspaceIdLayoutProps {
 }
 
 const WorkspaceIdLayout = ({ children }: WorkspaceIdLayoutProps) => {
-  const { parentMessageId, onClose } = usePanel();
-  const showPanel = !!parentMessageId;
+  const { parentMessageId, profileMemberId, onClose } = usePanel();
+  const showPanel = !!parentMessageId || !!profileMemberId;
 
   return (
     <div className="h-full">
@@ -47,6 +48,11 @@ const WorkspaceIdLayout = ({ children }: WorkspaceIdLayoutProps) => {
                     messageId={parentMessageId as Id<"messages">}
                     onClose={onClose}
             
+                  />
+                ) : profileMemberId? (
+                  <Profile 
+                  memberId={profileMemberId as Id<"members">}
+                  onClose={onClose}
                   />
                 ) : (
                   <div className="flex h-full items-center justify-center">
