@@ -56,7 +56,9 @@ export const Toolbar = () => {
             <CommandGroup heading="Channels">
               {channels?.map((channel) => (
                 <Link href={`/workspace/${workspaceId}/channel/${channel._id}`}>
-                <CommandItem key={channel._id} onSelect={() => onChannelClick(channel._id)}>{channel.name}</CommandItem>
+                  <CommandItem key={channel._id} onSelect={() => onChannelClick(channel._id)}>
+                    {channel.name}
+                  </CommandItem>
                 </Link>
               ))}
 
